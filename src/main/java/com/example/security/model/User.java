@@ -14,14 +14,19 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "users")
 public class User implements UserDetails {
+    public User(){
+       this.status = true;
+       this.failed_logins = 0;
+       this.created_at =  LocalDateTime.now();
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -30,9 +35,9 @@ public class User implements UserDetails {
     private LocalDateTime otp_expires_in;
     private String password;
     private String email;
-    private int failed_logins = 0;
+    private int failed_logins ;
     private long customer_id;
-    private boolean status = true;
+    private boolean status;
     private LocalDateTime last_login;
     private LocalDateTime created_at;
 
@@ -49,21 +54,21 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return status;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return status;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return status;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return status;
+        return true;
     }
 }

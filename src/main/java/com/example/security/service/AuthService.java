@@ -24,6 +24,7 @@ public class AuthService {
                         loginRequest.getPassword()
                 )
         );
+        System.out.println("fetching user");
         var user = userRepo.findByEmail(loginRequest.getEmail()).orElseThrow();
         var jwt = jwtService.generateToken(user);
         return AuthenticationResponse

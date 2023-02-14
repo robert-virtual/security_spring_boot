@@ -42,6 +42,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
          email = jwtService.extractEmail(jwt); // Todo: extract email from JWT Token
         if (email == null || SecurityContextHolder.getContext().getAuthentication() != null){
+            System.out.println("null email or user already authenticated");
             filterChain.doFilter(request,response);
             return;
         }
