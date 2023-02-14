@@ -1,9 +1,6 @@
 package com.example.security.service;
 
-import com.example.security.model.AuthenticationResponse;
-import com.example.security.model.LoginRequest;
-import com.example.security.model.RegisterRequest;
-import com.example.security.model.User;
+import com.example.security.model.*;
 import com.example.security.repository.CustomerRepository;
 import com.example.security.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -36,7 +33,14 @@ public class AuthService {
     }
 
     public AuthenticationResponse register(RegisterRequest registerRequest) {
-        int customer_id = customerRepo.save(registerRequest).getId();
+        var customer = Customer.builder()
+                .name(registerRequest.getName())
+                .birthdate(registerRequest.getBirthdate())
+                .phone(registerRequest.getPhone())
+                .email(registerRequest.getEmail())
+                .lastname(registerRequest.getLastname())
+                .build();
+        int customer_id = customerRepo.save(customer).getId();
         var user =  User.builder()
         .customer_id(customer_id)
         .role(registerRequest.getRole())
