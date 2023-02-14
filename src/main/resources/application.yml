@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    url: jdbc:sqlserver://localhost:1433;database=facebookdb;trustServerCertificate=true
+    username: rober
+    password: superhardpass12
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database: sql_server
