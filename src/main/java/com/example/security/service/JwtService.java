@@ -20,7 +20,9 @@ public class JwtService {
 
     // should be an environment variable
     private static final String  ACCESS_TOKEN_SECRET = "25432A462D4A614E645267556B58703273357638792F423F4428472B4B625065";
-    private static final int ACCESS_TOKEN_EXPIRATION_MILLISECONDS = 1000*60*2;
+    // 1000 milliseconds = 1 second
+    // 1000 millis * 60 seconds = 1 minute = 60000 millis
+    private static final int ACCESS_TOKEN_EXPIRATION_MILLISECONDS = 1000*60;// 1 minute
     public String extractEmail(String jwt) {
         return extractClaim(jwt,Claims::getSubject);
     }
